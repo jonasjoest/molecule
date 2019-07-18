@@ -532,7 +532,7 @@ class VagrantClient(object):
         instance_name = self._module.params['instance_name']
 
         return os.path.join(
-            self._config.scenario.ephemeral_directory,
+            os.environ['MOLECULE_EPHEMERAL_DIRECTORY'],
             'vagrant-{}.{}'.format(instance_name, __type),
         )
 

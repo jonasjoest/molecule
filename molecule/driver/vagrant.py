@@ -160,9 +160,9 @@ class Vagrant(base.Base):
             self.vagrantfile,
             self.vagrantfile_config,
             self.instance_config,
-            os.path.join(self._config.scenario.ephemeral_directory, '.vagrant'),
-            os.path.join(self._config.scenario.ephemeral_directory, 'vagrant-*.out'),
-            os.path.join(self._config.scenario.ephemeral_directory, 'vagrant-*.err'),
+            os.path.join(os.environ['MOLECULE_EPHEMERAL_DIRECTORY'], '.vagrant'),
+            os.path.join(os.environ['MOLECULE_EPHEMERAL_DIRECTORY'], 'vagrant-*.out'),
+            os.path.join(os.environ['MOLECULE_EPHEMERAL_DIRECTORY'], 'vagrant-*.err'),
         ]
 
     @property
@@ -195,11 +195,11 @@ class Vagrant(base.Base):
 
     @property
     def vagrantfile(self):
-        return os.path.join(self._config.scenario.ephemeral_directory, 'Vagrantfile')
+        return os.path.join(os.environ['MOLECULE_EPHEMERAL_DIRECTORY'], 'Vagrantfile')
 
     @property
     def vagrantfile_config(self):
-        return os.path.join(self._config.scenario.ephemeral_directory, 'vagrant.yml')
+        return os.path.join(os.environ['MOLECULE_EPHEMERAL_DIRECTORY'], 'vagrant.yml')
 
     def _get_instance_config(self, instance_name):
         instance_config_dict = util.safe_load_file(self._config.driver.instance_config)
